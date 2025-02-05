@@ -32,6 +32,11 @@ cd "$BOOST_SOURCE_DIR"
 bjam="$(pwd)/b2"
 stage="$(pwd)/stage"
 
+# Latest Source Pull
+rm -rf libs/compatibility
+git reset --hard origin/master
+git submodule update --recursive
+
 fail()
 {
     echo "$@" >&2
@@ -50,7 +55,9 @@ apply_patch()
     local patch="$1"
     local path="$2"
     echo "Applying $patch..."
-    git apply --check --reverse --directory="$path" "$patch" || git apply --directory="$path" "$patch"
+    pushd $path
+    cat $patch | patch -N -p 1
+    popd
 }
 
 apply_patch "../patches/libs/config/0001-Define-BOOST_ALL_NO_LIB.patch" "libs/config"
