@@ -60,8 +60,8 @@ apply_patch()
     popd
 }
 
-apply_patch "../patches/libs/config/0001-Define-BOOST_ALL_NO_LIB.patch" "libs/config"
-apply_patch "../patches/libs/fiber/0001-DRTVWR-476-Use-WIN32_LEAN_AND_MEAN-for-each-include-.patch" "libs/fiber"
+apply_patch "../../../patches/libs/config/0001-Define-BOOST_ALL_NO_LIB.patch" "libs/config"
+apply_patch "../../../patches/libs/fiber/0001-DRTVWR-476-Use-WIN32_LEAN_AND_MEAN-for-each-include-.patch" "libs/fiber"
 
 if [[ "$OSTYPE" == "cygwin" || "$OSTYPE" == "msys" ]] ; then
     autobuild="$(cygpath -u $AUTOBUILD)"
